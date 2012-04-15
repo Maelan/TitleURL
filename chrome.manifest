@@ -1,0 +1,3 @@
+content     TitleURL                       chrome/content/
+skin        TitleURL                       chrome/skin/
+overlay     chrome://browser/content/browser.xul            chrome://TitleURL/content/content.xul

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="style.css"?>
+
+<overlay id="TitleURL"
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+	
+   <script type="application/javascript" src="script.js" />
+	
+	<toolbaritem id="urlbar-icons">
+		<box id="TitleURL" position="1"  class="TitleURL-current" >
+			<label id="TitleURL-current"/>
+			<label id="TitleURL-preview"/>
+		</box>
+	</toolbaritem>
+	
+	
+</overlay>

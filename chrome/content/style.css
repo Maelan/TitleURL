@@ -1,0 +1,62 @@
+
+/* Show | hide */
+
+/*#urlbar-container:not(:hover) > #urlbar:not([focused]) .urlbar-input-box*/
+/*#urlbar:not([focused]) .urlbar-input-box:not(:hover)*/
+#urlbar:not([focused]) .urlbar-input-box:not(:hover) > .urlbar-input {
+	/* To hide the input, simply reduce its size; don’t “delete” it because
+	   it makes the input inaccessible by keyboard (via TAB or Ctrl+L
+	   shortcut) and causes displaying bugs (icon not refreshed, bookmark-
+	   star icon not displayed…). */
+	/*display: none !important;*/
+	-moz-box-flex: 0 !important;    /* overhidden by XUL attribute ‘flex’, which must then be deleted (see script.js) */
+	width: 0 !important;
+}
+/*.urlbar-input-box {
+	-moz-box-flex: 1 !important;    /* to cancel the effect of the previous statement when displayed * /
+}*/
+
+/*#urlbar-container:hover #TitleURL,
+#urlbar[focused] #TitleURL*/
+.urlbar-input-box:hover > #TitleURL,
+#urlbar[focused] #TitleURL {
+	display: none !important;
+}
+
+#TitleURL:not(.TitleURL-current) > #TitleURL-current,
+#TitleURL:not(.TitleURL-preview) > #TitleURL-preview {
+	display: none !important;
+}
+
+
+/* A bit of style */
+
+#urlbar .urlbar-input {
+	font-family: monospace !important;
+}
+#urlbar[focused] .urlbar-input {
+	color: blue !important;
+}
+
+#TitleURL {
+	-moz-box-flex: 1 !important;
+	/*margin-bottom: 0 !important;*/
+	margin-bottom: -2px !important;
+	-moz-box-align: center !important;
+}
+
+#TitleURL-current {
+	font-weight: bold !important;
+}
+#TitleURL > .TitleURL-progress {
+	font-style: italic !important;
+}
+
+
+/* Reduce tabs (hide their titles) */
+.tabbrowser-tab:not([pinned]) {
+	min-width: 29px !important;
+}
+.tab-close-button {
+	display: none !important;
+}
