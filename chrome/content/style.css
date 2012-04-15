@@ -1,36 +1,46 @@
 
-/* Show | hide */
+/** Show & hide mecanism **/
 
-/*#urlbar-container:not(:hover) > #urlbar:not([focused]) .urlbar-input-box*/
-/*#urlbar:not([focused]) .urlbar-input-box:not(:hover)*/
+/* Show & hide the the standard URL input / the custom TitleURL.
+   → when hovered or focused */
 #urlbar:not([focused]) .urlbar-input-box:not(:hover) > .urlbar-input {
 	/* To hide the input, simply reduce its size; don’t “delete” it because
 	   it makes the input inaccessible by keyboard (via TAB or Ctrl+L
 	   shortcut) and causes displaying bugs (icon not refreshed, bookmark-
 	   star icon not displayed…). */
 	/*display: none !important;*/
-	-moz-box-flex: 0 !important;    /* overhidden by XUL attribute ‘flex’, which must then be deleted (see script.js) */
 	width: 0 !important;
+	-moz-box-flex: 0 !important;
+	/* ↑ overhidden by XUL attribute ‘flex’, which must be deleted via JS
+	     if present to make this statement take effect */
 }
-/*.urlbar-input-box {
-	-moz-box-flex: 1 !important;    /* to cancel the effect of the previous statement when displayed * /
-}*/
-
-/*#urlbar-container:hover #TitleURL,
-#urlbar[focused] #TitleURL*/
 .urlbar-input-box:hover > #TitleURL,
 #urlbar[focused] #TitleURL {
 	display: none !important;
 }
 
+/* Show & hide the current title / the preview title.
+   → when a tab is hovered (indicated by the class applied to #TitleURL) */
 #TitleURL:not(.TitleURL-current) > #TitleURL-current,
 #TitleURL:not(.TitleURL-preview) > #TitleURL-preview {
 	display: none !important;
 }
 
+/* Show & hide the standard identity box / the custom preview icon.
+   → when a tab is hovered (indicated by the class TitleURL-preview applied to
+     #identity-box) */
+#identity-box.TitleURL-preview #page-proxy-stack > :not(#TitleURL-icon),
+#identity-box.TitleURL-preview #identity-icon-labels {
+	display: none !important;
+}
+#identity-box:not(.TitleURL-preview) #TitleURL-icon {
+	display: none !important;
+}
 
-/* A bit of style */
 
+/** A bit of style **/
+
+/* Tune the url (to help distinguish it from the title). */
 #urlbar .urlbar-input {
 	font-family: monospace !important;
 }
@@ -38,13 +48,16 @@
 	color: blue !important;
 }
 
-#TitleURL {
+/* Alignment. */
+#TitleURL > label {
 	-moz-box-flex: 1 !important;
-	/*margin-bottom: 0 !important;*/
-	margin-bottom: -2px !important;
-	-moz-box-align: center !important;
+	margin-bottom: 0 !important;
+	/* needed to be well aligned with the url… */
+	/*margin-bottom: -2px !important;*/
+	/*-moz-box-align: center !important;*/
 }
 
+/* Special styles to distinguish current / preview titles, and when loading. */
 #TitleURL-current {
 	font-weight: bold !important;
 }
@@ -53,7 +66,7 @@
 }
 
 
-/* Reduce tabs (hide their titles) */
+/* Reduce tabs (hide their titles). */
 .tabbrowser-tab:not([pinned]) {
 	min-width: 29px !important;
 }

@@ -10,27 +10,13 @@ window.addEventListener("load", function _() {
 		node:     document.getElementById("TitleURL"),
 		current:  document.getElementById("TitleURL-current"),
 		preview:  document.getElementById("TitleURL-preview"),
-		image:    document.getElementById("page-proxy-favicon"),
-		/* Tab being hovered and previewed */
+		icon:     document.getElementById("TitleURL-icon"),
+		/* identity box: the box in the urlbar containing the icon of the
+		   current tab (to hide its content when a tab is previewed, and
+		   show the preview icon instead) */
+		idbox:    document.getElementById("identity-box"),
+		/* the tab being hovered and previewed */
 		tabprev:  null,
-		
-		/* Updates the title and its style with the status of the tab
-		   (being busy or not). */
-		/*busy:  function(e) {
-			var tab =  e.target;
-			var node;
-			if(tab == gBrowser.selectedTab)
-				node =  TitleURL.current;
-			else if(tab == TitleURL.tabprev)
-				node =  TitleURL.preview;
-			else    return;
-			if(tab.getAttribute("busy") == "true")
-				node.className +=  " TitleURL-progress";
-			else
-				node.className =  node.className.replace (
-				  /\bTitleURL-progress\b/g, "");
-			TitleURL.set(node, tab);
-		},*/
 		
 		/* Updates the title and its style with the status of the tab
 		   (being busy or not). */
@@ -52,7 +38,7 @@ window.addEventListener("load", function _() {
 				node.className +=  " TitleURL-progress";
 			else
 				node.className =  node.className.replace (
-				  /\bTitleURL-progress\b/g, "");
+				  /\b ?TitleURL-progress\b/g, "");
 		},
 		
 		/* Updates the title to the one of the tab passed. */
@@ -61,19 +47,20 @@ window.addEventListener("load", function _() {
 		},
 		
 		
-		/* Updates the icon to the one of the tab passed. */
-		setImage:       function(tab) {
-			TitleURL.image.src =  tab.image;
+		/* Updates the preview icon to the one of the tab passed. */
+		setIcon:       function(tab) {
+			TitleURL.icon.src =  tab.image;
 		},
 		
-		/*  */
+		/* Updates everything at a time: title, preview icon and status. */
 		set:            function(node, tab) {
 			TitleURL.setStatus(node, tab);
 			TitleURL.setTitle(node, tab);
-			TitleURL.setImage(tab);
+			if(tab == TitleURL.tabprev)
+				TitleURL.setIcon(tab);
 		},
 		
-		/* Sets the “current” title to the one of the currently selected
+		/* Sets the current title to the one of the currently selected
 		   tab. */
 		setCurrent:     function() {
 			TitleURL.set(TitleURL.current, gBrowser.selectedTab);
@@ -81,28 +68,31 @@ window.addEventListener("load", function _() {
 				TitleURL.showCurrent();
 		},
 		
-		/* Sets the “preview” title to the one of the hovered tab, and
+		/* Sets the preview title to the one of the hovered tab, and
 		   shows it instead of the current title. */
 		setPreview:     function(e) {
 			var tab =  e.currentTarget;
 			if(tab != gBrowser.selectedTab) {
+				TitleURL.tabprev =  tab;
 				TitleURL.set(TitleURL.preview, tab);
 				TitleURL.node.className =
 				  TitleURL.node.className.replace  (
 				  /\bTitleURL-current\b/g, "TitleURL-preview" );
-				TitleURL.tabprev =  tab;
+				TitleURL.idbox.className +=  " TitleURL-preview";
 			}
 		},
 		
 		/* Shows the current title again. */
 		showCurrent:    function() {
+			TitleURL.tabprev =  null;
 			TitleURL.node.className =
 			  TitleURL.node.className.replace  (
-			  /\bTitleURL-preview\b/g, "TitleURL-current"  );
-			TitleURL.setImage(gBrowser.selectedTab);
-			TitleURL.tabprev =  null;
+			  /\bTitleURL-preview\b/g, "TitleURL-current" );
+			TitleURL.idbox.className =
+			  TitleURL.idbox.className.replace  (
+			  /\b ?TitleURL-preview\b/g, "" );
 		},
-		
+
 		/* Makes the tab created “hoverable”, that is to say, we can
 		   hover it to preview its title. */
 		setHoverable:   function(tab) {

@@ -52,11 +52,8 @@ set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 exe '1resize ' . ((&lines * 30 + 34) / 69)
-exe 'vert 1resize ' . ((&columns * 80 + 46) / 92)
-exe '2resize ' . ((&lines * 14 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 80 + 46) / 92)
-exe '3resize ' . ((&lines * 20 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 80 + 46) / 92)
+exe '2resize ' . ((&lines * 8 + 34) / 69)
+exe '3resize ' . ((&lines * 26 + 34) / 69)
 argglobal
 edit install.rdf
 setlocal keymap=
@@ -102,7 +99,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
@@ -135,7 +132,7 @@ setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
-setlocal shiftwidth=8
+setlocal shiftwidth=4
 setlocal noshortname
 setlocal nosmartindent
 setlocal softtabstop=0
@@ -150,7 +147,7 @@ setlocal synmaxcol=3000
 if &syntax != 'xml'
 setlocal syntax=xml
 endif
-setlocal tabstop=8
+setlocal tabstop=4
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -160,12 +157,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 21 - ((20 * winheight(0) + 15) / 30)
+let s:l = 12 - ((11 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-21
-normal! 028l
+12
+normal! 0
 wincmd w
 argglobal
 edit chrome.manifest
@@ -270,12 +267,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 3 - ((2 * winheight(0) + 7) / 14)
+let s:l = 3 - ((1 * winheight(0) + 4) / 8)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 3
-normal! 0
+normal! 035l
 wincmd w
 argglobal
 edit chrome/content/content.xul
@@ -322,7 +319,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
@@ -355,7 +352,7 @@ setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
-setlocal shiftwidth=8
+setlocal shiftwidth=4
 setlocal noshortname
 setlocal nosmartindent
 setlocal softtabstop=0
@@ -370,7 +367,7 @@ setlocal synmaxcol=3000
 if &syntax != 'xml'
 setlocal syntax=xml
 endif
-setlocal tabstop=8
+setlocal tabstop=4
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -380,19 +377,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 14 - ((13 * winheight(0) + 10) / 20)
+let s:l = 20 - ((19 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-14
-normal! 03l
+20
+normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 30 + 34) / 69)
-exe 'vert 1resize ' . ((&columns * 80 + 46) / 92)
-exe '2resize ' . ((&lines * 14 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 80 + 46) / 92)
-exe '3resize ' . ((&lines * 20 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 80 + 46) / 92)
+exe '2resize ' . ((&lines * 8 + 34) / 69)
+exe '3resize ' . ((&lines * 26 + 34) / 69)
 tabedit chrome/content/style.css
 set splitbelow splitright
 set nosplitbelow
@@ -502,11 +496,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 39 - ((38 * winheight(0) + 33) / 67)
+let s:l = 16 - ((0 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-39
+16
 normal! 0
 tabedit chrome/content/script.js
 set splitbelow splitright
@@ -617,12 +611,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 20 - ((19 * winheight(0) + 33) / 67)
+let s:l = 44 - ((16 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-20
-normal! 021l
+44
+normal! 022l
 tabnext 3
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

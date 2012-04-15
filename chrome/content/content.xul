@@ -6,12 +6,23 @@
    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
    xmlns:xbl="http://www.mozilla.org/xbl">
 	
-   <script type="application/javascript" src="script.js" />
+	<script type="application/javascript" src="script.js" />
 	
+	<!-- location: at the place of the standard identity icon displayed in the
+	     URL bar) -->
+	<stack id="page-proxy-stack">
+		<!-- Preview icon: icon of the tab hovered -->
+		<image id="TitleURL-icon" src="" />
+	</stack>
+	
+	<!-- location: over the URL input of the URL bar; temporarily here, but
+	     with JS it will be relocated in a better place (see script.js) -->
 	<toolbaritem id="urlbar-icons">
 		<box id="TitleURL" position="1"  class="TitleURL-current" >
-			<label id="TitleURL-current"/>
-			<label id="TitleURL-preview"/>
+			<!-- Current title: title of the current tab -->
+			<label id="TitleURL-current" value="" />
+			<!-- Preview title: title of the tab hovered -->
+			<label id="TitleURL-preview" value="" />
 		</box>
 	</toolbaritem>
 	
