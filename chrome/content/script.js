@@ -15,7 +15,7 @@ window.addEventListener("load", function _() {
 		   current tab (to hide its content when a tab is previewed, and
 		   show the preview icon instead) */
 		idbox:    document.getElementById("identity-box"),
-		/* the tab being hovered and previewed */
+		/* the tab being hovered and previewed (null if no tab is hovered) */
 		tabprev:  null,
 		
 		/* Updates the title and its style with the status of the tab
@@ -59,32 +59,9 @@ window.addEventListener("load", function _() {
 			if(tab == TitleURL.tabprev)
 				TitleURL.setIcon(tab);
 		},
-		
-		/* Sets the current title to the one of the currently selected
-		   tab. */
-		setCurrent:     function() {
-			TitleURL.set(TitleURL.current, gBrowser.selectedTab);
-			if(gBrowser.selectedTab == TitleURL.tabprev)
-				TitleURL.showCurrent();
-		},
-		
-		/* Sets the preview title to the one of the hovered tab, and
-		   shows it instead of the current title. */
-		setPreview:     function(e) {
-			var tab =  e.currentTarget;
-			if(tab != gBrowser.selectedTab) {
-				TitleURL.tabprev =  tab;
-				TitleURL.set(TitleURL.preview, tab);
-				TitleURL.node.className =
-				  TitleURL.node.className.replace  (
-				  /\bTitleURL-current\b/g, "TitleURL-preview" );
-				TitleURL.idbox.className +=  " TitleURL-preview";
-			}
-		},
-		
-		/* Shows the current title again. */
+
+		/* Shows the current title. */
 		showCurrent:    function() {
-			TitleURL.tabprev =  null;
 			TitleURL.node.className =
 			  TitleURL.node.className.replace  (
 			  /\bTitleURL-preview\b/g, "TitleURL-current" );
@@ -93,11 +70,48 @@ window.addEventListener("load", function _() {
 			  /\b ?TitleURL-preview\b/g, "" );
 		},
 
+		/* Shows the preview title. */
+		showPreview:    function() {
+			TitleURL.node.className =
+			  TitleURL.node.className.replace  (
+			  /\bTitleURL-current\b/g, "TitleURL-preview" );
+			TitleURL.idbox.className +=  " TitleURL-preview";
+		},
+		
+		/* Sets the current title to the one of the currently selected tab (and
+		   possibly shows it instead of the preview title if this tab is the one
+		   hovered, or hides it in favour of the preview title if another tab is
+		   hovered). */
+		setCurrent:     function() {
+			TitleURL.set(TitleURL.current, gBrowser.selectedTab);
+			if(gBrowser.selectedTab == TitleURL.tabprev)
+				TitleURL.showCurrent();
+			else if(TitleURL.tabprev != null)
+				TitleURL.showPreview();
+		},
+		
+		/* Sets the preview title to the one of the hovered tab, and shows it
+		   instead of the current title (if the tab hovered is not the currently
+		   selected one). */
+		setPreview:     function(e) {
+			var tab =  e.currentTarget;
+			TitleURL.tabprev =  tab;
+			TitleURL.set(TitleURL.preview, tab);
+			if(tab != gBrowser.selectedTab)
+				TitleURL.showPreview();
+		},
+		
+		/* Indicates that no tab is hovered anymore. */
+		unsetPreview:   function() {
+			TitleURL.tabprev =  null;
+			TitleURL.showCurrent();
+		},
+
 		/* Makes the tab created “hoverable”, that is to say, we can
 		   hover it to preview its title. */
 		setHoverable:   function(tab) {
 			tab.addEventListener("mouseover", TitleURL.setPreview, false);
-			tab.addEventListener("mouseout", TitleURL.showCurrent, false);
+			tab.addEventListener("mouseout", TitleURL.unsetPreview, false);
 		}
 		
 	};
@@ -125,6 +139,13 @@ window.addEventListener("load", function _() {
 	        .addEventListener("TabOpen", function(e) {
 	        	TitleURL.setHoverable(e.target);
 	        }, false);
-	TitleURL.setHoverable(gBrowser.selectedTab);
+	/* On window load, the event “tabOpen” is thrown for each tab loaded so they
+	   are set hoverable automatically (see above); except for the first tab,
+	   thus we have to do it manually. */
+	TitleURL.setHoverable(gBrowser.tabContainer.getItemAtIndex(0));
+	/* in principle, we should do that ↓, but in fact it is done yet when the
+	   content of the selected tab is loaded (“tabAttrModified”); that is not
+	   true if we have a blank page (about:blank), but nothing grave. */
+	//TitleURL.setCurrent(gBrowser.selectedTab);
 	
 },  false);
