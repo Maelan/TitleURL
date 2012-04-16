@@ -1,0 +1,10 @@
+[en-US]
+
+Displays the title of the tabs in the URL bar.
+
+This extension helps you saving space: it reduces the tabs to their icon (so hides their title and close button), and displays the title of the current tab in the URL bar instead of the URL itself. The URL (whose style is tuned) is still accessible, and shown when focused or when the title is hovered. This extension also shows the title and icon of other tabs (with a different style) when they are hovered. Finally, when the page is loading, the style of the title is modified.
+
+
+[fr-FR]
+
+Affiche le titre des onglets dans la barre d’adresse.

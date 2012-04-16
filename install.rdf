@@ -3,26 +3,36 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	
-	<Description about="urn:mozilla:install-manifest">
-		<em:id>titleurl@perso.net</em:id>
-		<em:type>2</em:type>
-		
-		<!-- Target Application this extension can install into, 
-		with minimum and maximum supported versions. --> 
-		<em:targetApplication>
-			<Description>
-				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-				<em:minVersion>4.0</em:minVersion>
-				<em:maxVersion>12.*</em:maxVersion>
-			</Description>
-		</em:targetApplication>
-		
-		<!-- Front End MetaData -->
+ <Description about="urn:mozilla:install-manifest">
+	<em:id>titleurl@maelan.addons.mozilla.org</em:id>
+	<em:type>2</em:type>
+	
+	<!-- Target application: Mozilla Firefox -->
+	
+	<em:targetApplication>
+	 <Description>
+		<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+		<em:minVersion>4.0</em:minVersion>
+		<em:maxVersion>12.*</em:maxVersion>
+	 </Description>
+	</em:targetApplication>
+	
+	
+	<!-- Front end metadata -->
+	
+	<em:version>0.8</em:version>
+	<em:name>TitleURL</em:name>
+	<em:creator>Maëlan</em:creator>
+	<em:description>Displays the title of the tabs in the URL bar.</em:description>
+	
+	<em:localized>
+	 <Description>
+		<em:locale>fr-FR</em:locale>
 		<em:name>TitleURL</em:name>
-		<em:version>0.8</em:version>
-		<em:description>Displays the title of the tabs in the URL bar.
-
-This extension helps you saving space: it reduces the tabs to their icon (so hides their title and close button), and displays the title of the current tab in the URL bar instead of the URL itself. The URL (whose style is tuned) is still accessible, and shown when focused or when the title is hovered. This extension also shows the title and icon of other tabs (with a different style) when they are hovered. Finally, when the page is loading, the style of the title is modified.</em:description>
-		<em:creator>Maëlan44</em:creator>
-	</Description>      
+		<em:creator>Maëlan</em:creator>
+		<em:description>Affiche le titre des onglets dans la barre d’adresse.</em:description>
+	 </Description>
+	</em:localized>
+	
+ </Description>      
 </RDF>
