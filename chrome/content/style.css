@@ -64,6 +64,13 @@
 #TitleURL > .TitleURL-progress {
 	font-style: italic !important;
 }
+/* Color of the identity box when previewing, to cancel the color applied (blue
+   or green) when the current tab contains a secure page: yellow. */
+#identity-box.TitleURL-preview {
+	background-image: -moz-linear-gradient(rgb(255, 255, 171), rgb(235, 235, 151)) !important;
+	box-shadow: 0pt 1px 0pt rgba(128, 64, 0, 0.05) inset !important;
+	color: rgb(128, 64, 0) !important;
+}
 
 
 /* Reduce tabs (hide their titles). */

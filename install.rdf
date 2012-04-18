@@ -20,7 +20,7 @@
 	
 	<!-- Front end metadata -->
 	
-	<em:version>0.8</em:version>
+	<em:version>1.0</em:version>
 	<em:name>TitleURL</em:name>
 	<em:creator>Maëlan</em:creator>
 	<em:description>Displays the title of the tabs in the URL bar.</em:description>
