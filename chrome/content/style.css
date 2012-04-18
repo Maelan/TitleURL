@@ -64,6 +64,7 @@
 #TitleURL > .TitleURL-progress {
 	font-style: italic !important;
 }
+
 /* Color of the identity box when previewing, to cancel the color applied (blue
    or green) when the current tab contains a secure page: yellow. */
 #identity-box.TitleURL-preview {
@@ -79,4 +80,10 @@
 }
 .tab-close-button {
 	display: none !important;
+}
+
+/* Separate pinned and unpinned tab with a gap (since both are reduced, we can’t
+   recognize them otherwise). */
+.tabbrowser-tab[pinned] + .tabbrowser-tab:not([pinned]) {
+	margin-left: 10px !important;
 }
