@@ -48,7 +48,7 @@ window.addEventListener("load", function _() {
 		
 		
 		/* Updates the preview icon to the one of the tab passed. */
-		setIcon:       function(tab) {
+		setIcon:        function(tab) {
 			TitleURL.icon.src =  tab.image;
 		},
 		
@@ -56,7 +56,7 @@ window.addEventListener("load", function _() {
 		set:            function(node, tab) {
 			TitleURL.setStatus(node, tab);
 			TitleURL.setTitle(node, tab);
-			if(tab == TitleURL.tabprev)
+			if(node == TitleURL.preview)
 				TitleURL.setIcon(tab);
 		},
 
@@ -138,6 +138,14 @@ window.addEventListener("load", function _() {
 	gBrowser.tabContainer
 	        .addEventListener("TabOpen", function(e) {
 	        	TitleURL.setHoverable(e.target);
+	        }, false);
+	/* When a tab is closed while hovered, a preview of this tab can still be
+	   shown in certain circumstances, because tabprev is not set to null. To
+	   fix that: */
+	gBrowser.tabContainer
+	        .addEventListener("TabClose", function(e) {
+	        	if(e.target == TitleURL.tabprev)
+	        		TitleURL.unsetPreview();
 	        }, false);
 	/* On window load, the event “tabOpen” is thrown for each tab loaded so they
 	   are set hoverable automatically (see above); except for the first tab,
