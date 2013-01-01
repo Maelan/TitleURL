@@ -50,10 +50,9 @@
 /* Alignment. */
 #TitleURL > label {
 	-moz-box-flex: 1 !important;
-	margin-bottom: 0 !important;
-	/* needed to be well aligned with the url… */
-	/*margin-bottom: -2px !important;*/
-	/*-moz-box-align: center !important;*/
+	margin-bottom: 0 !important;;
+	-moz-margin-start: 0 !important;
+
 }
 
 /* Special styles to distinguish current / preview titles, and when loading. */
@@ -66,12 +65,12 @@
 
 /* Size and position of the preview favicon. */
 #TitleURL-icon {
-	/*width: 16px !important;
-	height: 16px !important;*/
-	/* ↑ already done with the standard ‘tab-icon-image’ class */
-	margin-left: 4px !important;
+	width: 16px !important;
+	height: 16px !important;
 	margin-top: 2px !important;
 	margin-bottom: 2px !important;
+	-moz-margin-start: 4px !important;
+	-moz-margin-end: 3px !important;
 }
 
 /* Color of the identity box when previewing, to cancel the color applied (blue
@@ -94,5 +93,5 @@
 /* Separate pinned and unpinned tab with a gap (since both are reduced, we can’t
    recognize them otherwise). */
 .tabbrowser-tab[pinned] + .tabbrowser-tab:not([pinned]) {
-	margin-left: 10px !important;
+	-moz-margin-start: 10px !important;
 }
