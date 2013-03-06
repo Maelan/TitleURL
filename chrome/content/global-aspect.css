@@ -3,37 +3,39 @@
 
 /* Show & hide the the standard URL input / the custom TitleURL.
    → when hovered or focused */
-#urlbar:not([focused]) .urlbar-input-box:not(:hover) > .urlbar-input {
+#urlbar:not([focused]):not(:hover) .urlbar-input-box {
+	min-width: 0;
+	-moz-box-flex: 0;
+}
+#urlbar:not([focused]):not(:hover) .urlbar-input-box > .urlbar-input {
 	/* To hide the input, simply reduce its size; don’t “delete” it because
 	   it makes the input inaccessible by keyboard (via TAB or Ctrl+L
 	   shortcut) and causes displaying bugs (icon not refreshed, bookmark-
 	   star icon not displayed…). */
-	/*display: none !important;*/
-	width: 0 !important;
-	-moz-box-flex: 0 !important;
-	/* ↑ overhidden by XUL attribute ‘flex’, which must be deleted via JS
-	     if present to make this statement take effect */
+	/*display: none;*/
+	width: 0;
+	-moz-box-flex: 0;
 }
-.urlbar-input-box:hover > #TitleURL,
+#urlbar:hover #TitleURL,
 #urlbar[focused] #TitleURL {
-	display: none !important;
+	display: none;
 }
 
 /* Show & hide the current title / the preview title.
    → when a tab is hovered (indicated by the class applied to #TitleURL) */
 #TitleURL:not(.TitleURL-current) > #TitleURL-current,
 #TitleURL:not(.TitleURL-preview) > #TitleURL-preview {
-	display: none !important;
+	display: none;
 }
 
 /* Show & hide the standard identity box / the custom preview icon.
    → when a tab is hovered (indicated by the class TitleURL-preview applied to
      #identity-box) */
 #identity-box.TitleURL-preview > :not(#TitleURL-icon) {
-	display: none !important;
+	display: none;
 }
 #identity-box:not(.TitleURL-preview) #TitleURL-icon {
-	display: none !important;
+	display: none;
 }
 
 
@@ -41,57 +43,58 @@
 
 /* Tune the url (to help distinguish it from the title). */
 #urlbar .urlbar-input {
-	font-family: monospace !important;
+	font-family: monospace;
 }
 #urlbar[focused] .urlbar-input {
-	color: blue !important;
+	color: blue;
 }
 
 /* Alignment. */
+#TitleURL {
+	-moz-box-align: center;
+}
 #TitleURL > label {
-	-moz-box-flex: 1 !important;
-	margin-bottom: 0 !important;;
-	-moz-margin-start: 0 !important;
-
+	margin-bottom: 0;
+	-moz-margin-start: 0;
 }
 
 /* Special styles to distinguish current / preview titles, and when loading. */
 #TitleURL-current {
-	font-weight: bold !important;
+	font-weight: bold;
 }
 #TitleURL > .TitleURL-progress {
-	font-style: italic !important;
+	font-style: italic;
 }
 
 /* Size and position of the preview favicon. */
 #TitleURL-icon {
-	width: 16px !important;
-	height: 16px !important;
-	margin-top: 2px !important;
-	margin-bottom: 2px !important;
-	-moz-margin-start: 4px !important;
-	-moz-margin-end: 3px !important;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-moz-margin-start: 4px;
+	-moz-margin-end: 3px;
 }
 
 /* Color of the identity box when previewing, to cancel the color applied (blue
    or green) when the current tab contains a secure page: yellow. */
 #identity-box.TitleURL-preview {
-	background-image: -moz-linear-gradient(rgb(255, 255, 171), rgb(235, 235, 151)) !important;
-	box-shadow: 0pt 1px 0pt rgba(128, 64, 0, 0.05) inset !important;
-	color: rgb(128, 64, 0) !important;
+	background-image: -moz-linear-gradient(rgb(255, 255, 171), rgb(235, 235, 151));
+	box-shadow: 0pt 1px 0pt rgba(128, 64, 0, 0.05) inset;
+	color: rgb(128, 64, 0);
 }
 
 
 /* Reduce tabs (hide their titles). */
 .tabbrowser-tab:not([pinned]) {
-	min-width: 29px !important;
+	min-width: 29px;
 }
 .tab-close-button {
-	display: none !important;
+	display: none;
 }
 
 /* Separate pinned and unpinned tab with a gap (since both are reduced, we can’t
    recognize them otherwise). */
 .tabbrowser-tab[pinned] + .tabbrowser-tab:not([pinned]) {
-	-moz-margin-start: 10px !important;
+	-moz-margin-start: 10px;
 }

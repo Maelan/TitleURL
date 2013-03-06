@@ -16,14 +16,13 @@
 		       src="" /> <!-- class="tab-icon-image" fadein="true" -->
 	</box>
 	
-	<!-- location: over the URL input of the URL bar; temporarily here, but
-	     with JS it will be relocated in a better place (see script.js) -->
-	<toolbaritem id="urlbar-icons">
-		<box id="TitleURL" position="1"  class="TitleURL-current" >
+	<!-- location: between the identity box and the input of the URL bar -->
+	<toolbaritem id="urlbar">
+		<box id="TitleURL" insertafter="identity-box" flex="1" class="TitleURL-current" >
 			<!-- Current title: title of the current tab -->
-			<label id="TitleURL-current" value="" />
+			<label id="TitleURL-current" flex="1" crop="end" value="" />
 			<!-- Preview title: title of the tab hovered -->
-			<label id="TitleURL-preview" value="" />
+			<label id="TitleURL-preview" flex="1" crop="end" value="" />
 		</box>
 	</toolbaritem>
 	

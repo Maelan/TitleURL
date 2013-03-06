@@ -46,7 +46,6 @@ window.addEventListener("load", function _() {
 			node.value =  tab.label;
 		},
 		
-		
 		/* Updates the preview icon to the one of the tab passed. */
 		setIcon:        function(tab) {
 			TitleURL.icon.src =  tab.image;
@@ -59,7 +58,7 @@ window.addEventListener("load", function _() {
 			if(node == TitleURL.preview)
 				TitleURL.setIcon(tab);
 		},
-
+		
 		/* Shows the current title. */
 		showCurrent:    function() {
 			TitleURL.node.className =
@@ -69,7 +68,7 @@ window.addEventListener("load", function _() {
 			  TitleURL.idbox.className.replace  (
 			  /\b ?TitleURL-preview\b/g, "" );
 		},
-
+		
 		/* Shows the preview title. */
 		showPreview:    function() {
 			TitleURL.node.className =
@@ -106,7 +105,7 @@ window.addEventListener("load", function _() {
 			TitleURL.tabprev =  null;
 			TitleURL.showCurrent();
 		},
-
+		
 		/* Makes the tab created “hoverable”, that is to say, we can
 		   hover it to preview its title. */
 		setHoverable:   function(tab) {
@@ -116,21 +115,9 @@ window.addEventListener("load", function _() {
 		
 	};
 	
-	/* Move the title to a more convenient place than the one obtained via
-	   the XUL overlay (could not put it directly here because the parent
-	   node do not have ID) */
-	var input =  document.getAnonymousElementByAttribute  (
-	               document.getElementById("urlbar"),
-	               "anonid", "textbox-input-box"          );
-	input.insertBefore(TitleURL.node, input.firstChild);
-	
-	/* Permit resizing the input in order to hide it (see style.css; CSS
-	   property ‘-moz-box-flex’ is overhidden by XUL attribute ‘flex’) */
-	//TitleURL.input.removeAttribute("flex");
-	
 	/* Listen to the events */
-	/*document.getElementById("appcontent")
-	        .addEventListener("DOMContentLoaded", TitleURL.setCurrent, false);*/
+	document.getElementById("appcontent")
+	        .addEventListener("DOMContentLoaded", TitleURL.setCurrent, false);
 	gBrowser.tabContainer
 	        .addEventListener("TabSelect", TitleURL.setCurrent, false);
 	gBrowser.tabContainer
@@ -151,9 +138,9 @@ window.addEventListener("load", function _() {
 	   are set hoverable automatically (see above); except for the first tab,
 	   thus we have to do it manually. */
 	TitleURL.setHoverable(gBrowser.tabContainer.getItemAtIndex(0));
-	/* in principle, we should do that ↓, but in fact it is done yet when the
-	   content of the selected tab is loaded (“tabAttrModified”); that is not
-	   true if we have a blank page (about:blank), but nothing grave. */
+	/* in principle, we should do that ↓, but in fact it is already done when
+	   the content of the selected tab is loaded (“tabAttrModified”); that is
+	   not true if we have a blank page (about:blank), but nothing grave. */
 	//TitleURL.setCurrent(gBrowser.selectedTab);
 	
 },  false);

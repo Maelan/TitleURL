@@ -5,8 +5,8 @@
 
 /* Size and position of the preview favicon. */
 #TitleURL-icon {
-	margin-top: 1px !important;
-	margin-bottom: 1px !important;
-	-moz-margin-start: 3px !important;
-	-moz-margin-end: 2px !important;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	-moz-margin-start: 3px;
+	-moz-margin-end: 2px;
 }
