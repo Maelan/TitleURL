@@ -1,4 +1,6 @@
 content     TitleURL                       chrome/content/
 skin        TitleURL      classic/1.0      skin/
 skin        TitleURL      classic/1.0      skin/win/        os=WinNT
+locale      TitleURL      en-US            chrome/locale/en-US/
+locale      TitleURL      fr-FR            chrome/locale/fr-FR/
 overlay     chrome://browser/content/browser.xul            chrome://TitleURL/content/content.xul

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+ 
+<!DOCTYPE options SYSTEM "chrome://TitleURL/locale/options.dtd">
+ 
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<setting type="bool" pref="extensions.TitleURL.use_url_monospace"
+	  title="&use_mono.title;"
+	  desc="&use_mono.desc;" />
+	<setting type="bool" pref="extensions.TitleURL.use_url_color"
+	  title="&use_color.title;"
+	  desc="&use_color.desc;" />
+	<setting type="color" pref="extensions.TitleURL.url_color"
+	  title="&color.title;"
+	  desc="&color.desc;" />
+</vbox>

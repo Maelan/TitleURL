@@ -18,6 +18,71 @@ window.addEventListener("load", function _() {
 		/* the tab being hovered and previewed (null if no tab is hovered) */
 		tabprev:  null,
 		
+		/* CSS rules (used to handle the user preferences) */
+		css:      null,
+		rule1:    null,
+		rule2:    null,
+		
+		/* Preferences handler */
+		prefs:    Components.classes["@mozilla.org/preferences-service;1"]
+                            .getService(Components.interfaces.nsIPrefBranch)
+		                    .getBranch("extensions.TitleURL."),
+		/* Preferences observer */
+		prefsObserver: {
+			register: function() {
+				this.branch = TitleURL.prefs;
+				this.branch.addObserver("", this, false);
+			},
+			unregister: function() {
+				this.branch.removeObserver("", this);
+			},
+			observe: function() {
+				TitleURL.updatePrefs();
+			}
+		},
+		
+		
+	
+		/* Init the TitleURL.css member (search for the stylesheet applied to
+		   the XUL document which comes from this addon). */
+		initCss:        function() {
+			/* Search for the stylesheet applied to the XUL document which comes
+			   from this addon. */
+			for(i = 0;  !TitleURL.css && i < document.styleSheets.length;  i++)
+				if( document.styleSheets[i].href.toLowerCase()
+					== "chrome://titleurl/skin/aspect.css" )
+					TitleURL.css = document.styleSheets[i]
+			
+			/* Get or create the targeted rules. */
+			var rules = TitleURL.css.cssRules;
+			var sel1 = "#urlbar .urlbar-input";
+			var sel2 = "#urlbar[focused] .urlbar-input";
+			for(i = 0;  i < rules.length;  i++) {
+				if(rules[i].selectorText == sel1)
+					TitleURL.rule1 = rules[i];
+				if(rules[i].selectorText == sel2)
+					TitleURL.rule2 = rules[i];
+			}
+			if(!TitleURL.rule1) {
+				TitleURL.css.insertRule(sel1+"{ }", rules.length);
+				TitleURL.rule1 = TitleURL.css.cssRules[rules.length-1];
+			}
+			if(!TitleURL.rule2) {
+				TitleURL.css.insertRule(sel2+"{ }", rules.length);
+				TitleURL.rule2 = TitleURL.css.cssRules[rules.length-1];
+			}
+		},
+		
+		/* Updates things after the user has modified settings. */
+		updatePrefs:    function() {
+			var useMono =  TitleURL.prefs.getBoolPref("use_url_monospace");
+			var useColor = TitleURL.prefs.getBoolPref("use_url_color");
+			var color =    TitleURL.prefs.getCharPref("url_color");
+			
+			TitleURL.rule1.style.fontFamily = useMono? "monospace" : null;
+			TitleURL.rule2.style.color = useColor? color : null;
+		},
+		
 		/* Updates the title and its style with the status of the tab
 		   (being busy or not). */
 		statusChanged:  function(e) {
@@ -115,6 +180,8 @@ window.addEventListener("load", function _() {
 		
 	};
 	
+	TitleURL.initCss();
+	
 	/* Listen to the events */
 	document.getElementById("appcontent")
 	        .addEventListener("DOMContentLoaded", TitleURL.setCurrent, false);
@@ -142,5 +209,8 @@ window.addEventListener("load", function _() {
 	   the content of the selected tab is loaded (“tabAttrModified”); that is
 	   not true if we have a blank page (about:blank), but nothing grave. */
 	//TitleURL.setCurrent(gBrowser.selectedTab);
+	
+	TitleURL.prefsObserver.register();
+	TitleURL.updatePrefs();
 	
 },  false);

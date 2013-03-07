@@ -42,12 +42,12 @@
 /** A bit of style **/
 
 /* Tune the url (to help distinguish it from the title). */
-#urlbar .urlbar-input {
+/*#urlbar .urlbar-input {
 	font-family: monospace;
 }
 #urlbar[focused] .urlbar-input {
 	color: blue;
-}
+}*/
 
 /* Alignment. */
 #TitleURL {

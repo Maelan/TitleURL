@@ -34,5 +34,10 @@
 	 </Description>
 	</em:localized>
 	
+	<!-- Preferences -->
+	
+	<em:optionsURL>chrome://TitleURL/content/options.xul</em:optionsURL>
+	<em:optionsType>2</em:optionsType>
+	
  </Description>      
 </RDF>

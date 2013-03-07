@@ -1,0 +1,8 @@
+<!ENTITY use_mono.title  "Police monospace pour l’URL" >
+<!ENTITY use_mono.desc   "Utiliser une police monospace pour afficher l’URL." >
+
+<!ENTITY use_color.title "Couleur pour l’édition de l’URL" >
+<!ENTITY use_color.desc  "Utiliser une couleur différente pour l’URL lors de l’édition." >
+
+<!ENTITY color.title "Couleur" >
+<!ENTITY color.desc  "La couleur à utiliser." >

@@ -1,0 +1,8 @@
+<!ENTITY use_mono.title  "Monospace font for URL" >
+<!ENTITY use_mono.desc   "Use monospace font for the URL." >
+
+<!ENTITY use_color.title "Colour for focused URL" >
+<!ENTITY use_color.desc  "Use a different font colour for the URL when focused." >
+
+<!ENTITY color.title "Colour" >
+<!ENTITY color.desc  "The colour to use." >
