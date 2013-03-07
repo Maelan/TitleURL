@@ -41,7 +41,8 @@
 
 /** A bit of style **/
 
-/* Tune the url (to help distinguish it from the title). */
+/* Tune the url (to help distinguish it from the title).
+   → Now done via some user preferences. */
 /*#urlbar .urlbar-input {
 	font-family: monospace;
 }
