@@ -10,3 +10,8 @@
 	-moz-margin-start: 3px;
 	-moz-margin-end: 2px;
 }
+
+/* Alignment. */
+#TitleURL {
+	margin-bottom: 2px;
+}

@@ -89,6 +89,7 @@
 /* Reduce tabs (hide their titles). */
 .tabbrowser-tab:not([pinned]) {
 	min-width: 29px;
+	max-width: 29px;
 }
 .tab-close-button {
 	display: none;
