@@ -25,7 +25,7 @@ window.addEventListener("load", function _() {
 		
 		/* Preferences handler */
 		prefs:    Components.classes["@mozilla.org/preferences-service;1"]
-                            .getService(Components.interfaces.nsIPrefBranch)
+                            .getService(Components.interfaces.nsIPrefService)
 		                    .getBranch("extensions.TitleURL."),
 		/* Preferences observer */
 		prefsObserver: {
