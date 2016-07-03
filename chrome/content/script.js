@@ -1,10 +1,7 @@
-var TitleURL = {};
-
-
 window.addEventListener("load", function _() {
 	window.removeEventListener("load", _, false);
 	
-	TitleURL = {
+	var TitleURL = {
 		
 		/* XUL nodes */
 		node:     document.getElementById("TitleURL"),
@@ -48,19 +45,19 @@ window.addEventListener("load", function _() {
 		initCss:        function() {
 			/* Search for the stylesheet applied to the XUL document which comes
 			   from this addon. */
-			for(i = 0;  !TitleURL.css && i < document.styleSheets.length;  i++)
+			for(var i = 0;  !TitleURL.css && i < document.styleSheets.length;  i++)
 				if( document.styleSheets[i].href.toLowerCase()
-				    == "chrome://titleurl/skin/aspect.css" )
+				    === "chrome://titleurl/skin/aspect.css" )
 					TitleURL.css = document.styleSheets[i]
 			
 			/* Get or create the targeted rules. */
 			var rules = TitleURL.css.cssRules;
 			var sel1 = "#urlbar .urlbar-input";
 			var sel2 = "#urlbar[focused] .urlbar-input";
-			for(i = 0;  i < rules.length;  i++) {
-				if(rules[i].selectorText == sel1)
+			for(var i = 0;  i < rules.length;  i++) {
+				if(rules[i].selectorText === sel1)
 					TitleURL.rule1 = rules[i];
-				if(rules[i].selectorText == sel2)
+				if(rules[i].selectorText === sel2)
 					TitleURL.rule2 = rules[i];
 			}
 			if(!TitleURL.rule1) {
@@ -88,9 +85,9 @@ window.addEventListener("load", function _() {
 		statusChanged:  function(e) {
 			var tab =  e.target;
 			var node;
-			if(tab == gBrowser.selectedTab)
+			if(tab === gBrowser.selectedTab)
 				node =  TitleURL.current;
-			else if(tab == TitleURL.tabprev)
+			else if(tab === TitleURL.tabprev)
 				node =  TitleURL.preview;
 			else    return;
 			TitleURL.set(node, tab);
@@ -99,7 +96,7 @@ window.addEventListener("load", function _() {
 		/* Updates the style of the title according to the status of the tab
 		   passed (being busy or not). */
 		setStatus:      function(node, tab) {
-			if(tab.getAttribute("busy") == "true")
+			if(tab.getAttribute("busy") === "true")
 				node.classList.add("TitleURL-progress");
 			else
 				node.classList.remove("TitleURL-progress");
@@ -119,7 +116,7 @@ window.addEventListener("load", function _() {
 		set:            function(node, tab) {
 			TitleURL.setStatus(node, tab);
 			TitleURL.setTitle(node, tab);
-			if(node == TitleURL.preview)
+			if(node === TitleURL.preview)
 				TitleURL.setIcon(tab);
 		},
 		
@@ -143,7 +140,7 @@ window.addEventListener("load", function _() {
 		   hovered). */
 		setCurrent:     function() {
 			TitleURL.set(TitleURL.current, gBrowser.selectedTab);
-			if(gBrowser.selectedTab == TitleURL.tabprev)
+			if(gBrowser.selectedTab === TitleURL.tabprev)
 				TitleURL.showCurrent();
 			else if(TitleURL.tabprev != null)
 				TitleURL.showPreview();
@@ -188,7 +185,7 @@ window.addEventListener("load", function _() {
 	   shown in certain circumstances, because tabprev is not set to null. To
 	   fix that: */
 	gBrowser.tabContainer.addEventListener("TabClose", function(e) {
-		if(e.target == TitleURL.tabprev)
+		if(e.target === TitleURL.tabprev)
 			TitleURL.unsetPreview();
 	}, false);
 	/* On window load, the event “tabOpen” is thrown for each tab loaded so they
