@@ -55,8 +55,9 @@
 	-moz-box-align: center;
 }
 #TitleURL > label {
-	margin-bottom: 0;
-	-moz-margin-start: 0;
+	margin: 0px;
+	padding: 0px 1px;
+	display: inline;
 }
 
 /* Special styles to distinguish current / preview titles, and when loading. */
@@ -71,10 +72,7 @@
 #TitleURL-icon {
 	width: 16px;
 	height: 16px;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	-moz-margin-start: 4px;
-	-moz-margin-end: 3px;
+	list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
 }
 
 /* Color of the identity box when previewing, to cancel the color applied (blue
@@ -88,6 +86,8 @@
 
 /* Reduce tabs (hide their titles). */
 .tabbrowser-tab:not([pinned]) {
+	/* pinned tabs are 34px; 29px is more compact, tabs look more like squares,
+	   and the “…” label (when there is no favicon) is better centered */
 	min-width: 29px;
 	max-width: 29px;
 }
@@ -98,5 +98,5 @@
 /* Separate pinned and unpinned tab with a gap (since both are reduced, we can’t
    recognize them otherwise). */
 .tabbrowser-tab[pinned] + .tabbrowser-tab:not([pinned]) {
-	-moz-margin-start: 10px;
+	-moz-margin-start: 30px;
 }

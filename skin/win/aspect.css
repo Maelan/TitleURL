@@ -1,17 +1,23 @@
 /*** Windows-specific aspect ***/
 
+/* 2016-07-03: these are probably broken (need testing on Windows), disabling */
+
 
 @import url("chrome://TitleURL/content/global-aspect.css");
 
 /* Size and position of the preview favicon. */
 #TitleURL-icon {
+/*
 	margin-top: 1px;
 	margin-bottom: 1px;
 	-moz-margin-start: 3px;
 	-moz-margin-end: 2px;
+*/
 }
 
 /* Alignment. */
 #TitleURL {
+/*
 	margin-bottom: 2px;
+*/
 }

@@ -12,7 +12,7 @@
 	     URL bar) -->
 	<box id="identity-box">
 		<!-- Preview icon: icon of the tab hovered -->
-		<image id="TitleURL-icon" insertafter="page-proxy-favicon"
+		<image id="TitleURL-icon" insertbefore="identity-icon"
 		       src="" /> <!-- class="tab-icon-image" fadein="true" -->
 	</box>
 	
