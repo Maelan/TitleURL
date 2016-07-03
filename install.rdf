@@ -12,15 +12,15 @@
 		<em:targetApplication>
 		 <Description>
 			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-			<em:minVersion>17.0</em:minVersion>
-			<em:maxVersion>20.*</em:maxVersion>
+			<em:minVersion>45.0</em:minVersion>
+			<em:maxVersion>80.*</em:maxVersion>
 		 </Description>
 		</em:targetApplication>
 		
 		
 		<!-- Front end metadata -->
 		
-		<em:version>1.0.2</em:version>
+		<em:version>1.0.3</em:version>
 		<em:name>TitleURL</em:name>
 		<em:creator>Maëlan</em:creator>
 		<em:description>Displays the title of the tabs in the URL bar.</em:description>
