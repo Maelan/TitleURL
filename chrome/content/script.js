@@ -45,11 +45,16 @@ window.addEventListener("load", function _() {
     initCss: function() {
       /* Search for the stylesheet applied to the XUL document which comes
          from this addon. */
-      for (var i = 0; !TitleURL.css && i < document.styleSheets.length; i++) {
-        if (document.styleSheets[i].href.toLowerCase() ==
-          "chrome://titleurl/skin/aspect.css") {
-          TitleURL.css = document.styleSheets[i];
+      document.styleSheets.filter = Array.prototype.filter;
+      var found = document.styleSheets.filter(function (stylesheet) {
+        if (!stylesheet.href) {
+          return false;
         }
+        return stylesheet.href.toLowerCase() === "chrome://titleurl/skin/aspect.css";
+      });
+
+      if (found.length) {
+        TitleURL.css = found[0];
       }
 
         /* Get or create the targeted rules. */
