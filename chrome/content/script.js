@@ -25,8 +25,8 @@ window.addEventListener("load", function _() {
 		
 		/* Preferences handler */
 		prefs:    Components.classes["@mozilla.org/preferences-service;1"]
-                            .getService(Components.interfaces.nsIPrefService)
-		                    .getBranch("extensions.TitleURL."),
+		            .getService(Components.interfaces.nsIPrefService)
+		            .getBranch("extensions.TitleURL."),
 		/* Preferences observer */
 		prefsObserver: {
 			register: function() {
@@ -42,7 +42,7 @@ window.addEventListener("load", function _() {
 		},
 		
 		
-	
+		
 		/* Init the TitleURL.css member (search for the stylesheet applied to
 		   the XUL document which comes from this addon). */
 		initCss:        function() {
@@ -50,7 +50,7 @@ window.addEventListener("load", function _() {
 			   from this addon. */
 			for(i = 0;  !TitleURL.css && i < document.styleSheets.length;  i++)
 				if( document.styleSheets[i].href.toLowerCase()
-					== "chrome://titleurl/skin/aspect.css" )
+				    == "chrome://titleurl/skin/aspect.css" )
 					TitleURL.css = document.styleSheets[i]
 			
 			/* Get or create the targeted rules. */
@@ -100,10 +100,9 @@ window.addEventListener("load", function _() {
 		   passed (being busy or not). */
 		setStatus:      function(node, tab) {
 			if(tab.getAttribute("busy") == "true")
-				node.className +=  " TitleURL-progress";
+				node.classList.add("TitleURL-progress");
 			else
-				node.className =  node.className.replace (
-				  /\b ?TitleURL-progress\b/g, "");
+				node.classList.remove("TitleURL-progress");
 		},
 		
 		/* Updates the title to the one of the tab passed. */
@@ -126,20 +125,16 @@ window.addEventListener("load", function _() {
 		
 		/* Shows the current title. */
 		showCurrent:    function() {
-			TitleURL.node.className =
-			  TitleURL.node.className.replace  (
-			  /\bTitleURL-preview\b/g, "TitleURL-current" );
-			TitleURL.idbox.className =
-			  TitleURL.idbox.className.replace  (
-			  /\b ?TitleURL-preview\b/g, "" );
+			TitleURL.node.classList.remove("TitleURL-preview");
+			TitleURL.node.classList.add("TitleURL-current");
+			TitleURL.idbox.classList.remove("TitleURL-preview");
 		},
 		
 		/* Shows the preview title. */
 		showPreview:    function() {
-			TitleURL.node.className =
-			  TitleURL.node.className.replace  (
-			  /\bTitleURL-current\b/g, "TitleURL-preview" );
-			TitleURL.idbox.className +=  " TitleURL-preview";
+			TitleURL.node.classList.remove("TitleURL-current");
+			TitleURL.node.classList.add("TitleURL-preview");
+			TitleURL.idbox.classList.add("TitleURL-preview");
 		},
 		
 		/* Sets the current title to the one of the currently selected tab (and
@@ -183,24 +178,19 @@ window.addEventListener("load", function _() {
 	TitleURL.initCss();
 	
 	/* Listen to the events */
-	document.getElementById("appcontent")
-	        .addEventListener("DOMContentLoaded", TitleURL.setCurrent, false);
-	gBrowser.tabContainer
-	        .addEventListener("TabSelect", TitleURL.setCurrent, false);
-	gBrowser.tabContainer
-	        .addEventListener("TabAttrModified", TitleURL.statusChanged, false);
-	gBrowser.tabContainer
-	        .addEventListener("TabOpen", function(e) {
-	        	TitleURL.setHoverable(e.target);
-	        }, false);
+	document.getElementById("appcontent").addEventListener("DOMContentLoaded", TitleURL.setCurrent, false);
+	gBrowser.tabContainer.addEventListener("TabSelect", TitleURL.setCurrent, false);
+	gBrowser.tabContainer.addEventListener("TabAttrModified", TitleURL.statusChanged, false);
+	gBrowser.tabContainer.addEventListener("TabOpen", function(e) {
+		TitleURL.setHoverable(e.target);
+	}, false);
 	/* When a tab is closed while hovered, a preview of this tab can still be
 	   shown in certain circumstances, because tabprev is not set to null. To
 	   fix that: */
-	gBrowser.tabContainer
-	        .addEventListener("TabClose", function(e) {
-	        	if(e.target == TitleURL.tabprev)
-	        		TitleURL.unsetPreview();
-	        }, false);
+	gBrowser.tabContainer.addEventListener("TabClose", function(e) {
+		if(e.target == TitleURL.tabprev)
+			TitleURL.unsetPreview();
+	}, false);
 	/* On window load, the event “tabOpen” is thrown for each tab loaded so they
 	   are set hoverable automatically (see above); except for the first tab,
 	   thus we have to do it manually. */
